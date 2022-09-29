@@ -6,13 +6,14 @@ from aiogram.dispatcher import FSMContext, Dispatcher
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from create_bot import bot, dp
 from aiogram.dispatcher.filters import Text
+from config import api_hash, api_id
 
 markup = ReplyKeyboardMarkup(resize_keyboard=True, row_width=1, one_time_keyboard=True)
 markup.add('Начать!')
 
 
 async def spam(target_channel, message, bot, chat_id):
-    async with TelegramClient('name', 12345678, 'API_HASH') as client:  # 1 session name 2 api_id 3 api_hash
+    async with TelegramClient('name', api_id, api_hash) as client:  # 1 session name 2 api_id 3 api_hash
         async def get_channel():
             mass = []
             for i in await client.get_dialogs():
